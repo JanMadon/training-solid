@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
+use App\Models\Instructor;
+use App\Repositories\CourseRepository;
+use App\Repositories\InstructorRepository;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Blog;
@@ -12,64 +16,22 @@ use App\Models\Config;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    private CourseRepository $courseRepository;
+    private InstructorRepository $instructorRepository;
+
+    public function __construct(CourseRepository $courseRepository, InstructorRepository $instructorRepository)
     {
-        // $this->middleware('auth', ['except' => ['checkUserEmailExists']]);
+        $this->courseRepository = $courseRepository;
+        $this->instructorRepository = $instructorRepository;
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
-        
-        $latestTab_courses = DB::table('courses')
-                    ->select('courses.*', 'instructors.first_name', 'instructors.last_name')
-                    ->selectRaw('AVG(course_ratings.rating) AS average_rating')
-                    ->leftJoin('course_ratings', 'course_ratings.course_id', '=', 'courses.id')
-                    ->join('instructors', 'instructors.id', '=', 'courses.instructor_id')
-                    ->where('courses.is_active',1)
-                    ->groupBy('courses.id')
-                    ->limit(8)
-                    ->orderBy('courses.updated_at', 'desc')
-                    ->get();
-        
-        $freeTab_courses = DB::table('courses')
-                    ->select('courses.*', 'instructors.first_name', 'instructors.last_name')
-                    ->selectRaw('AVG(course_ratings.rating) AS average_rating')
-                    ->leftJoin('course_ratings', 'course_ratings.course_id', '=', 'courses.id')
-                    ->join('instructors', 'instructors.id', '=', 'courses.instructor_id')
-                    ->where('courses.is_active',1)
-                    ->groupBy('courses.id')
-                    ->limit(8)
-                    ->where('courses.price', 0)
-                    ->get();
+        $latestTab_courses = $this->courseRepository->getLatestCourses($request->get('limit', 8));
+        $freeTab_courses = $this->courseRepository->getFreeCourses($request->get('limit', 8));
+        $discountTab_courses = $this->courseRepository->getDiscountCourses($request->get('limit', 8));
+        $instructors = $this->instructorRepository->getInstructors($request->get('limit', 8));
 
-        $discountTab_courses = DB::table('courses')
-                    ->select('courses.*', 'instructors.first_name', 'instructors.last_name')
-                    ->selectRaw('AVG(course_ratings.rating) AS average_rating')
-                    ->leftJoin('course_ratings', 'course_ratings.course_id', '=', 'courses.id')
-                    ->join('instructors', 'instructors.id', '=', 'courses.instructor_id')
-                    ->where('courses.is_active',1)
-                    ->groupBy('courses.id')
-                    ->limit(8)
-                    ->where('courses.strike_out_price', '<>' ,null)
-                    ->get();
-
-        $instructors = DB::table('instructors')
-                        ->select('instructors.*')
-                        ->join('users', 'users.id', '=', 'instructors.user_id')
-                        ->where('users.is_active',1)
-                        ->groupBy('instructors.id')
-                        ->limit(8)
-                        ->get();
                         
         return view('site/home', compact('latestTab_courses', 'freeTab_courses', 'discountTab_courses', 'instructors'));
     }
