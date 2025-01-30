@@ -31,8 +31,6 @@ class CoursesRepository extends TestCase
 
         // When:
         $latest = $repository->getLatestCourses(1);
-        dd(get_class($latest->first()));
-
         $free = $repository->getFreeCourses(1);
         $discounted = $repository->getDiscountCourses(1);
 
@@ -51,8 +49,6 @@ class CoursesRepository extends TestCase
     }
     private function assertValidStructureOfCourse($latest): void
     {
-        dd(get_class($latest));
-
         $this->assertArrayHasKey('id', (array)$latest);
         $this->assertArrayHasKey('instructor_id', (array)$latest);
         $this->assertArrayHasKey('category_id', (array)$latest);
