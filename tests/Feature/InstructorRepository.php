@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Repositories\Db\InstructorsRepositoryDb;
+use App\ValueObjects\Instructor;
 use Tests\Factories\CreateInstructor;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,11 +20,12 @@ class InstructorRepository extends TestCase
         $repository = app(InstructorsRepositoryDb::class);
 
         // When:
-        $instructors = $repository->getInstructors(1);
+        $instructors = $repository->getActive(1);
 
         //Then:
-        $this->assertEquals($instructor->getKey(), $instructors->first()->id);
-        $this->assertValidStructureOfInstructor($instructors->first());
+        $this->assertEquals($instructor->getKey(), $instructors->first()->getId());
+        //$this->assertValidStructureOfInstructor($instructors->first()); // when returned stc class from repository
+        $this->assertInstanceOf(Instructor::class, $instructors->first()); // when return instructorVO class
         $this->assertCount(1, $instructors);
     }
 

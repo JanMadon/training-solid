@@ -109,15 +109,16 @@
                 </div>
                 
                 <div class="row mt-4 mb-5">
+                    <?php /**@var \App\ValueObjects\Instructor $instructor */?>
                     @foreach ($instructors as $instructor) 
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                         <div class="instructor-box mx-auto text-center">
-                        <a href="{{ route('instructor.view', $instructor->instructor_slug) }}">
+                        <a href="{{ route('instructor.view', $instructor->getInstructorSlug()) }}">
                             <main>
-                                <img src="@if(Storage::exists($instructor->instructor_image)){{ Storage::url($instructor->instructor_image) }}@else{{ asset('backend/assets/images/course_detail_thumb.jpg') }}@endif">
+                                <img src="@if(Storage::exists($instructor->getInstructorImage())){{ Storage::url($instructor->getInstructorImage()) }}@else{{ asset('backend/assets/images/course_detail_thumb.jpg') }}@endif">
                                 <div class="col-md-12">
-                                    <h6 class="instructor-title">{{ $instructor->first_name.' '.$instructor->last_name }}</h6>
-                                    <p>{!! mb_strimwidth($instructor->biography, 0, 120, ".....") !!}</p>
+                                    <h6 class="instructor-title">{{ $instructor->getName() }}</h6>
+                                    <p>{!! mb_strimwidth($instructor->getBiography(), 0, 120, ".....") !!}</p>
                                 </div>
                             </main>
                         </a>

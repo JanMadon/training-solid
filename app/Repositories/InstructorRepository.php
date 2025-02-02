@@ -6,5 +6,5 @@ use Illuminate\Support\Collection;
 
 interface InstructorRepository
 {
-    public function getInstructors(int $limit): Collection;
+    public function getActive(int $limit): Collection;
 }

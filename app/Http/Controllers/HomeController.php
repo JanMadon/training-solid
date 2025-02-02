@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
-use App\Models\Instructor;
 use App\Repositories\CourseRepository;
 use App\Repositories\InstructorRepository;
 use Illuminate\Http\Request;
@@ -13,6 +11,7 @@ use DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactAdmin;
 use App\Models\Config;
+use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
@@ -25,15 +24,22 @@ class HomeController extends Controller
         $this->instructorRepository = $instructorRepository;
     }
 
-    public function index(Request $request)
+    public function index(Request $request): \Illuminate\Contracts\View\View
     {
         $latestTab_courses = $this->courseRepository->getLatestCourses($request->get('limit', 8));
         $freeTab_courses = $this->courseRepository->getFreeCourses($request->get('limit', 8));
         $discountTab_courses = $this->courseRepository->getDiscountCourses($request->get('limit', 8));
-        $instructors = $this->instructorRepository->getInstructors($request->get('limit', 8));
+        $instructors = $this->instructorRepository->getActive($request->get('limit', 8));
 
                         
-        return view('site/home', compact('latestTab_courses', 'freeTab_courses', 'discountTab_courses', 'instructors'));
+        return View::make('site/home', [
+                'latestTab_courses' => $latestTab_courses,
+                'freeTab_courses' => $freeTab_courses,
+                'discountTab_courses' => $discountTab_courses,
+                'instructors' => $instructors,
+            ]
+        );
+
     }
 
     /**

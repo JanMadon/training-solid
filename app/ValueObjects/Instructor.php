@@ -89,6 +89,11 @@ class Instructor implements Arrayable
         return $this->last_name;
     }
 
+    public function getName(): string
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
     public function getInstructorSlug(): string
     {
         return $this->instructor_slug;
@@ -176,5 +181,10 @@ class Instructor implements Arrayable
             'updated_at' => $this->updated_at,
         ];
     }
+
+//    public function __get($name)
+//    {
+//        return $this->$name;
+//    }
 
 }
