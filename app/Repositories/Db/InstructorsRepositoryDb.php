@@ -2,7 +2,6 @@
 
 namespace App\Repositories\Db;
 
-use App\Models\Instructor;
 use App\Repositories\InstructorRepository;
 use App\ValueObjects\Instructor as InstructorVO;
 use Illuminate\Support\Carbon;

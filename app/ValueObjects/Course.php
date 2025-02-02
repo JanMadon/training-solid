@@ -8,9 +8,7 @@ use Illuminate\Contracts\Support\Arrayable;
 final class Course implements Arrayable
 {
     private int $id;
-    private string $instructor_first_name;
-    private string $instructor_last_name;
-    private int $instructor_id;
+    private InstructorName $instructor;
     private int $category_id;
     private int $instruction_level_id;
     private string $course_title;
@@ -53,9 +51,7 @@ final class Course implements Arrayable
     )
     {
         $this->id = $id;
-        $this->instructor_first_name = $instructor_first_name;
-        $this->instructor_last_name = $instructor_last_name;
-        $this->instructor_id = $instructor_id;
+        $this->instructor = new InstructorName($instructor_id, $instructor_first_name, $instructor_last_name);
         $this->category_id = $category_id;
         $this->instruction_level_id = $instruction_level_id;
         $this->course_title = $course_title;
@@ -103,24 +99,29 @@ final class Course implements Arrayable
         return $this->id;
     }
 
+    public function getInstructor(): InstructorName
+    {
+        return $this->instructor;
+    }
+
     public function getInstructorFirstName(): string
     {
-        return $this->instructor_first_name;
+        return $this->instructor->getFirstName();
     }
 
     public function getInstructorLastName(): string
     {
-        return $this->instructor_last_name;
+        return $this->instructor->getLastName();
     }
 
     public function getInstructorName(): string
     {
-        return $this->instructor_first_name . ' ' . $this->instructor_last_name;
+        return $this->instructor->getFullName();
     }
 
     public function getInstructorId(): int
     {
-        return $this->instructor_id;
+        return $this->instructor->getId();
     }
 
     public function getCategoryId(): int

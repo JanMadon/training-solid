@@ -2,13 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\Category;
-use App\Models\Course;
-use App\Models\InstructionLevel;
-use App\Models\Instructor;
-use App\Models\User;
 use App\Repositories\Db\CoursesRepositoryDb;
 use App\ValueObjects\Course as CourseVO;
+use App\ValueObjects\InstructorName;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\Factories\CreateCourses;
@@ -43,6 +39,10 @@ class CoursesRepository extends TestCase
         $this->assertInstanceOf(CourseVO::class, $latest->first());
         $this->assertInstanceOf(CourseVO::class, $free->first());
         $this->assertInstanceOf(CourseVO::class, $discounted->first());
+
+        $this->assertInstanceOf(InstructorName::class, $latest->first()->getInstructor());
+        $this->assertInstanceOf(InstructorName::class, $free->first()->getInstructor());
+        $this->assertInstanceOf(InstructorName::class, $discounted->first()->getInstructor());
 
         $this->assertCount(1, $latest);
         $this->assertCount(1, $free);

@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="766eb5dd-fa46-49fc-992f-7fa8b6d85ac8" name="Changes" comment="implemented returned valueObject from InstructorRepository, improved test and home view">
-      <change afterPath="$PROJECT_DIR$/app/ValueObjects/Course.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="766eb5dd-fa46-49fc-992f-7fa8b6d85ac8" name="Changes" comment="added Course ValueObject used in CoursesRepository, implemented in tests and view">
+      <change afterPath="$PROJECT_DIR$/app/ValueObjects/InstructorName.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Repositories/Db/CoursesRepositoryDb.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Db/CoursesRepositoryDb.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/www_logs/nginx/access.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/www_logs/nginx/error.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/site/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/site/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/Db/InstructorsRepositoryDb.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Db/InstructorsRepositoryDb.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ValueObjects/Course.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ValueObjects/Course.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/Feature/CoursesRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/CoursesRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -220,7 +218,7 @@
       <workItem from="1701113514085" duration="4476000" />
       <workItem from="1738304311655" duration="37000" />
       <workItem from="1738344519723" duration="5693000" />
-      <workItem from="1738487840827" duration="4821000" />
+      <workItem from="1738487840827" duration="8240000" />
     </task>
     <task id="LOCAL-00001" summary="created trait Factory/CreateInstructor">
       <option name="closed" value="true" />
@@ -254,7 +252,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738490486893</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="added Course ValueObject used in CoursesRepository, implemented in tests and view">
+      <option name="closed" value="true" />
+      <created>1738493030789</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1738493030789</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -265,6 +271,7 @@
     <MESSAGE value="created test for InstructorsRepository" />
     <MESSAGE value="created instructor valueObject, added file to .gitignore" />
     <MESSAGE value="implemented returned valueObject from InstructorRepository, improved test and home view" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented returned valueObject from InstructorRepository, improved test and home view" />
+    <MESSAGE value="added Course ValueObject used in CoursesRepository, implemented in tests and view" />
+    <option name="LAST_COMMIT_MESSAGE" value="added Course ValueObject used in CoursesRepository, implemented in tests and view" />
   </component>
 </project>

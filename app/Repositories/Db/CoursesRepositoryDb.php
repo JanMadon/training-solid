@@ -70,8 +70,8 @@ class CoursesRepositoryDb implements CourseRepository
     {
         return DB::table('courses')
             ->select('courses.*', 'instructors.first_name', 'instructors.last_name')
-            ->selectRaw('AVG(course_ratings.rating) AS average_rating')
-            ->leftJoin('course_ratings', 'course_ratings.course_id', '=', 'courses.id')
+            //->selectRaw('AVG(course_ratings.rating) AS average_rating')
+            //->leftJoin('course_ratings', 'course_ratings.course_id', '=', 'courses.id')
             ->join('instructors', 'instructors.id', '=', 'courses.instructor_id')
             ->where('courses.is_active', true)
             ->groupBy('courses.id')
