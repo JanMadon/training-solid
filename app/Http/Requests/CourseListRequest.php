@@ -14,7 +14,6 @@ class CourseListRequest extends FormRequest
 
     public function rules(): array
     {
-        dump($this->get('sort_price'));
         return [
             'category_id' => ['nullable', 'array'],
             'category_id.*' => ['exists:categories,id'],
