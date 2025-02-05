@@ -45,7 +45,7 @@ class CourseListQueryDbHandler implements CourseListQueryHandler
         return $query->groupBy('courses.id');
     }
 
-    private function getBuilder(): \Illuminate\Database\Query\Builder
+    private function getBuilder(): Builder
     {
         return DB::table('courses')
             ->select('courses.*', 'instructors.first_name', 'instructors.last_name')

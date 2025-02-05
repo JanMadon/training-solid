@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="766eb5dd-fa46-49fc-992f-7fa8b6d85ac8" name="Changes" comment="added Course ValueObject used in CoursesRepository, implemented in tests and view">
-      <change afterPath="$PROJECT_DIR$/app/ValueObjects/InstructorName.php" afterDir="false" />
+    <list default="true" id="766eb5dd-fa46-49fc-992f-7fa8b6d85ac8" name="Changes" comment="refactoring course listing (use Specification Pattern)">
+      <change afterPath="$PROJECT_DIR$/app/ValueObjects/Boundaries.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Unit/PriceCriterion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/Db/CoursesRepositoryDb.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Db/CoursesRepositoryDb.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/Db/InstructorsRepositoryDb.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Db/InstructorsRepositoryDb.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ValueObjects/Course.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ValueObjects/Course.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/CoursesRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/CoursesRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/Criteria/PriceCriterion.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Criteria/PriceCriterion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/QueryHandlers/CourseListQueryDbHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/QueryHandlers/CourseListQueryDbHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artisan" beforeDir="false" afterPath="$PROJECT_DIR$/artisan" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +20,9 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution />
+    <execution>
+      <executable path="composer" />
+    </execution>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -171,32 +174,66 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;php.override.implement.member.chooser.php.doc&quot;: &quot;NONE&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "PHPUnit.PriceCriterion.executor": "Run",
+    "PHPUnit.PriceCriterion.testItShouldCreateBoundaries.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "credentialsType com.jetbrains.php.remote.interpreter.ui.PhpCreateRemoteSdkForm": "Docker",
+    "credentialsType com.jetbrains.php.remote.interpreter.ui.PhpInplaceEditRemoteSdkForm": "Docker",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "php.override.implement.member.chooser.php.doc": "NONE",
+    "settings.editor.selected.configurable": "php.test.frameworks.configurable",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
-  <component name="RunManager">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app" />
+    </key>
+  </component>
+  <component name="RunManager" selected="PHPUnit.PriceCriterion">
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
     </configuration>
+    <configuration name="PriceCriterion" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="lenkowskizy/solid-practices:latest" />
+        </PhpTestInterpreterSettings>
+      </CommandLine>
+      <TestRunner class="Tests\Unit\PriceCriterion" configuration_file="/opt/project/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/PriceCriterion.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="PriceCriterion.testItShouldCreateBoundaries" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="lenkowskizy/solid-practices:latest" />
+        </PhpTestInterpreterSettings>
+      </CommandLine>
+      <TestRunner class="Tests\Unit\PriceCriterion" configuration_file="/opt/project/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/PriceCriterion.php" method="testItShouldCreateBoundaries" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHPUnit.PriceCriterion" />
+        <item itemvalue="PHPUnit.PriceCriterion.testItShouldCreateBoundaries" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -218,7 +255,10 @@
       <workItem from="1701113514085" duration="4476000" />
       <workItem from="1738304311655" duration="37000" />
       <workItem from="1738344519723" duration="5693000" />
-      <workItem from="1738487840827" duration="8240000" />
+      <workItem from="1738487840827" duration="15623000" />
+      <workItem from="1738601960333" duration="9244000" />
+      <workItem from="1738690469114" duration="6433000" />
+      <workItem from="1738772358989" duration="5852000" />
     </task>
     <task id="LOCAL-00001" summary="created trait Factory/CreateInstructor">
       <option name="closed" value="true" />
@@ -260,11 +300,62 @@
       <option name="project" value="LOCAL" />
       <updated>1738493030789</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="created and used InstructorName value object">
+      <option name="closed" value="true" />
+      <created>1738514825327</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1738514825327</updated>
+    </task>
+    <task id="LOCAL-00007" summary="moving courseList method into separate controller">
+      <option name="closed" value="true" />
+      <created>1738618022477</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1738618022477</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added CourseListRequest and CurseListQuery class">
+      <option name="closed" value="true" />
+      <created>1738618114484</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1738618114484</updated>
+    </task>
+    <task id="LOCAL-00009" summary="additional methods to CurseRepository interface and implementation">
+      <option name="closed" value="true" />
+      <created>1738618165327</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1738618165327</updated>
+    </task>
+    <task id="LOCAL-00010" summary="refactoring course listing (use Specification Pattern)">
+      <option name="closed" value="true" />
+      <created>1738696499964</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1738696499964</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="created trait Factory/CreateInstructor" />
@@ -272,6 +363,15 @@
     <MESSAGE value="created instructor valueObject, added file to .gitignore" />
     <MESSAGE value="implemented returned valueObject from InstructorRepository, improved test and home view" />
     <MESSAGE value="added Course ValueObject used in CoursesRepository, implemented in tests and view" />
-    <option name="LAST_COMMIT_MESSAGE" value="added Course ValueObject used in CoursesRepository, implemented in tests and view" />
+    <MESSAGE value="created and used InstructorName value object" />
+    <MESSAGE value="moving courseList method into separate controller" />
+    <MESSAGE value="added CourseListRequest and CurseListQuery class" />
+    <MESSAGE value="additional methods to CurseRepository interface and implementation" />
+    <MESSAGE value="refactoring course listing (use Specification Pattern)" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring course listing (use Specification Pattern)" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
